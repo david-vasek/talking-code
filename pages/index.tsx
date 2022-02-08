@@ -1,82 +1,93 @@
 import Head from 'next/head'
+import Link from 'next/link'
+import Header from '../components/Header'
+import { sanityClient, urlFor } from '../sanity'
+import { Post } from '../typings'
 
-export default function Home() {
+interface Props {
+  posts: [Post]
+}
+
+export default function Home({ posts }: Props) {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="mx-auto max-w-7xl">
       <Head>
-        <title>Create Next App</title>
+        <title>DevTalk</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+      <Header />
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+      <div className="flex items-center justify-between rounded-xl border border-y border-gray-600 bg-gray-600 py-10 lg:py-10">
+        <div className="space-y-5 px-10">
+          <h1 className="max-w-xl font-serif text-6xl">
+            <span className="underline decoration-black decoration-4">
+              TalkingCode
+            </span>{' '}
+            is a programmer's paradise
+          </h1>
+          <h2>
+            A place to post your thoughts on any topic and connect with millions
+            of other users.
+          </h2>
         </div>
-      </main>
 
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="ml-2 h-4" />
-        </a>
-      </footer>
+        <img
+          className="hidden h-32 px-10 md:inline-flex lg:h-full lg:p-10"
+          src="https://lh3.googleusercontent.com/29Uhu3m6rgM_jSiLIACFOuNT3HVUSvhhoBv4KQYlj51vOJoYYDa3AFdSGVpLxCv6cIAVv2kdIkxu24m9IZLy5wHUdkYKP6-WOWGvGyibR9oo_z0usmJMilfQGAa1vTbJkpz7wB3trL2vViaeWAD3p75aXy13P-L2i6xy_fouwfal1vMBM5eVAprGD2FYH30cp5jhiUe0BHvhICK-suZLs2n60n8xMw1woZFBU_cxTfL5_dvpHAjzOlpi6FPR46-swQqm918za_EaWjEyN4R-uWNaUCnsKWJmJxmcwHrttORsptvRKPwOPvI7WRY9557T9d22ELHqgyS-rw367wiqCKIdZUczfJ5r8G_TEfW_w68vZRj94JSozFEYo6VdfDQhF-kilRR5T86OZV26PbqLKLfdq5RtfEuc7ZHgI2GG3wn7TJhaHgMORriJk8KpPsyzogyiC5u4bF1DC6z8I3v0J69D_TYE1OcoN42rGeFpSjIp1A3uOzbU9BDgaoGCZUzq4ooBnIp4hvuqqH_9LvioUIT-YsF_U_JALlyukuY6eQSphF4YjNs3H4fowqNfl6NtrkYAurgLYx3jyZm6DWBqxyGe9ZagouyZ9mnbtuELdelSRm2pR4W7V3IeN07GF-SgF8Q10PK1FwBAZiA-sFdKPddBu7gPWiTgJgiqlxHzw-wuwiW-soJNZmhgJYY55K-qDii2iGq6s1svKdUS7PVemw=s256-no?authuser=0"
+          alt=""
+        />
+      </div>
+
+      <div className="grid grid-cols-1 gap-3 p-2 sm:grid-cols-2 md:gap-6 md:p-6 lg:grid-cols-3">
+        {posts.map((post) => (
+          <Link key={post._id} href={`/post/${post.slug.current}`}>
+            <div className="group cursor-pointer overflow-hidden rounded-xl border border-black">
+              <img
+                className="h-60 w-full object-cover transition-transform duration-200 ease-in-out group-hover:scale-105"
+                src={urlFor(post.mainImage).url()!}
+                alt=""
+              />
+              <div className="flex justify-between bg-white p-5">
+                <div>
+                  <p className="text-lg font-bold">{post.title}</p>
+                  <p className="text-xs">
+                    {post.description} by {post.author.name}
+                  </p>
+                </div>
+
+                <img
+                  className="h-10 w-10 rounded-full"
+                  src={urlFor(post.author.image).url()!}
+                  alt=""
+                />
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   )
+}
+
+export const getServerSideProps = async () => {
+  const query = `*[_type == "post"]{
+    _id,
+    title,
+    author -> {
+    name,
+    image
+  },
+  description,
+  mainImage,
+  slug
+  }`
+
+  const posts = await sanityClient.fetch(query)
+
+  return {
+    props: {
+      posts,
+    },
+  }
 }
